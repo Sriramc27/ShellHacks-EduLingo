@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edulingo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('Education.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #edulingoTitle {
+            font-size: 80px; /* Increased font size */
+            margin-top: 8%;
+            color: #000000; /* Changed text color to blue */
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        #youtubeUrlContainer {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 20px; /* Making the border oval */
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #youtubeUrl {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none; /* Remove the input field border */
+            border-radius: 20px; /* Making the input field oval */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #processButton {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 20px; /* Making the button oval */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #processButton:hover {
+            background-color: #0056b3;
+        }
+
+        #videoFile {
+            display: none;
+        }
+
+        label {
+            cursor: pointer;
+            display: block;
+            padding: 10px;
+            color: rgb(13, 2, 2);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        #uploadButton {
+            display: none;
+        }
+
+        #fileName {
+            font-style: italic;
+            color: #555;
+        }
+
+        #translatedVideo {
+            display: none;
+            max-width: 100%;
+        }
+
+        .option-label {
+        display: inline-block;
+        width: 200px;
+        text-align: right;
+        margin-right: 10px;
+        }
+
+        select#sourceLanguage { width: 150px; padding: 8px 16px; border: 1px solid transparent; }
+
+        select#targetLanguage { width: 150px; padding: 8px 16px; border: 1px solid transparent; }
+        select#targetGender { width: 150px; padding: 8px 16px; border: 1px solid transparent; }
+
+
+        .option-select {
+        display: inline-block; /* Change from width to inline-block */
+        width: 150px; /* Allow the element to expand based on content */
+        }
+
+        /* Style the Start Processing button */
+        #startProcessingButton {
+            display: block;
+            margin: 0 auto;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #startProcessingButton:hover {
+            background-color: #0056b3;
+        }
+
+        .task-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: left;
+        }
+
+        .completed-task {
+            color: green;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .completed-task::before {
+            content: '\2713'; /* Checkmark character */
+            margin-right: 10px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="edulingoTitle">Edulingo</div>
+
+    <!-- Page 1: Enter YouTube URL -->
+    <div id="youtubeUrlContainer">
+        <input type="text" id="youtubeUrl" name="youtubeUrl" placeholder="https://www.youtube.com/watch?v=VIDEO_ID">
+        <button type="button" onclick="processYoutubeUrl()">Process Video</button>
+    </div>
+
+    <!-- Page 1.5: Language and Gender Options -->
+    <div id="languageOptionsContainer" class="task-container" style="display: none;">
+        <!--<h2>Select Language and Gender</h2>-->
+        <div class="option-label">
+            <label for="sourceLanguage">Select Source Language:</label>
+        </div>
+        <div class="option-select">
+            <select id="sourceLanguage">
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <!-- Add more language options here -->
+            </select>
+        </div>
+        <br>
+        <div class="option-label">
+            <label for="targetLanguage">Select Target Language:</label>
+        </div>
+        <div class="option-select">
+            <select id="targetLanguage">
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <!-- Add more language options here -->
+            </select>
+        </div>
+        <br>
+        <div class="option-label">
+            <label for="targetGender">Select Target Gender:</label>
+        </div>
+        <div class="option-select">
+            <select id="targetGender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <!-- Add more gender options here -->
+            </select>
+        </div>
+        <br>
+
+        <button type="button" id="startProcessingButton" onclick="startProcessing()">Start Processing</button>
+    </div>
+
+    <!-- Page 2: Processing Task 1 -->
+    <div id="task1Container" class="task-container" style="display: none;">
+        <h2>Processing...</h2>
+        <!-- Display task-specific content for processing task 1 here -->
+    </div>
+
+    <!-- Page 3: Processing Task 2 -->
+    <div id="task2Container" class="task-container" style="display: none;">
+        <h2>Converting...</h2>
+        <!-- Display task-specific content for processing task 2 here -->
+    </div>
+
+    <!-- Page 4: Processing Task 3 -->
+    <div id="task3Container" class="task-container" style="display: none;">
+        <h2>Translating...</h2>
+        <!-- Display task-specific content for processing task 3 here -->
+    </div>
+
+    <!-- Display Translated Video -->
+    <video id="translatedVideo" controls style="display: none;"></video>
+
+    <script>
+        function processYoutubeUrl() {
+            const youtubeUrl = document.getElementById("youtubeUrl").value;
+    
+            if (!youtubeUrl) {
+                alert("Please enter a YouTube video URL.");
+                return;
+            }
+    
+            // Extract the video ID from the YouTube URL
+            const videoId = extractVideoId(youtubeUrl);
+    
+            if (!videoId) {
+                alert("Invalid YouTube video URL. Please enter a valid URL.");
+                return;
+            }
+    
+            document.getElementById("youtubeUrlContainer").style.display = "none";
+            document.getElementById("languageOptionsContainer").style.display = "block";
+        }
+    
+        function extractVideoId(url) {
+            const match = url.match(/[?&]v=([^?&]+)/);
+            return match && match[1];
+        }
+    
+        async function startProcessing() {
+            const sourceLanguage = document.getElementById("sourceLanguage").value;
+            const targetLanguage = document.getElementById("targetLanguage").value;
+            const targetGender = document.getElementById("targetGender").value;
+    
+            document.getElementById("languageOptionsContainer").style.display = "none";
+    
+            // Simulate processing with a delay (replace this with your actual processing logic)
+            await simulateProcessing();
+    
+            // Continue with processing tasks...
+            await processTask(1, "Preprocessing completed");
+            await processTask(2, "Conversion completed");
+            await processTask(3, "Translation completed");
+    
+            displayTranslatedVideo();
+        }
+    
+        async function processTask(taskNumber, completionMessage) {
+            const taskContainer = document.getElementById(`task${taskNumber}Container`);
+            taskContainer.style.display = "block";
+    
+            // Simulate task processing with a delay (replace this with your actual processing logic)
+            await simulateTaskProcessing(taskNumber, 3000); // Each task takes 3 seconds
+    
+            taskContainer.innerHTML = `<div class="completed-task">${completionMessage}</div>`;
+        }
+    
+        async function simulateTaskProcessing(taskNumber, duration) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve();
+                }, duration);
+            });
+        }
+    
+        async function simulateProcessing() {
+            // Simulate processing with a delay (replace this with your actual processing logic)
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve();
+                }, 2000);
+            });
+        }
+    
+        function displayTranslatedVideo() {
+            document.getElementById("translatedVideo").style.display = "block";
+            alert("Processing complete. You can now view the translated video.");
+        }
+    </script>
+</body>
+</html>
+

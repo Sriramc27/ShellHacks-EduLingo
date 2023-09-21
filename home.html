@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Edulingo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('Education.png'); /* Replace 'background.jpg' with your image file path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #edulingoTitle {
+            font-size: 80px; /* Increased font size */
+            margin-top: 10%;
+            color: #000000; /* Changed text color to blue */
+        }
+
+        #welcomeContainer {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-top: 10px; /* Adjust the margin as needed */
+        }
+
+        #getStartedButton {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        #getStartedButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="edulingoTitle">Edulingo</div>
+    <div id="welcomeContainer">
+        <h1>Education Translation</h1>
+        <button id="getStartedButton" onclick="redirectToUploadPage()">Get Started</button>
+    </div>
+
+    <script>
+        function redirectToUploadPage() {
+            window.location.href = "upload.html"; // Replace with the actual path to your video upload page
+        }
+    </script>
+</body>
+</html>
